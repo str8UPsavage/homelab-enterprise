@@ -4,7 +4,6 @@ Enterprise homelab project focused on core infrastructure setup and configuratio
 
 # 🧠 Mini Enterprise HomeLab (Work in Progress)
 
-*Autore:* Giombattista Traina  
 *Status:* 🔧 Progetto in corso  
 *Virtualization Platform:* VMware Workstation  
 *Objective:* Creare un’infrastruttura aziendale virtuale completa per esercitarsi con Active Directory, DNS, DHCP e integrazione Linux/Windows in un ambiente simulato.
