@@ -1,12 +1,5 @@
 # homelab-enterprise
 Enterprise homelab project focused on core infrastructure setup and configuration. Includes Active Directory, DHCP, and network services as part of the “homework” environment for building and testing enterprise-like systems. Still work in progress.
-
-
-Perfetto 👌
-ecco un README.md già pronto per GitHub, che riassume fedelmente tutto ciò che abbiamo costruito finora nel laboratorio VMware — documentato in modo tecnico ma leggibile.
-È pensato come versione temporanea, in attesa che completiamo Ubuntu01 e FileSRV01.
-
-
 ---
 
 # 🧠 Mini Enterprise HomeLab (Work in Progress)
