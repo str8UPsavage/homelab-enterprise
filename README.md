@@ -1,100 +1,26 @@
-# homelab-enterprise
-Enterprise homelab project focused on core infrastructure setup and configuration. Includes Active Directory, DHCP, and network services as part of the “homework” environment for building and testing enterprise-like systems. Still work in progress.
----
+Mini Enterprise HomeLab
 
-# 🧠 Mini Enterprise HomeLab (Work in Progress)
+Il progetto Mini Enterprise HomeLab nasce come esercitazione tecnica per la costruzione progressiva di una piccola infrastruttura aziendale virtuale, interamente gestita all’interno di VMware Workstation.
+L’obiettivo principale è quello di comprendere in modo concreto il funzionamento dei principali servizi di rete — Active Directory, DNS, DHCP, e l’interoperabilità con sistemi Linux — riproducendo un ambiente realistico ma su scala ridotta e completamente controllata.
 
-*Status:* 🔧 Progetto in corso  
-*Virtualization Platform:* VMware Workstation  
-*Objective:* Creare un’infrastruttura aziendale virtuale completa per esercitarsi con Active Directory, DNS, DHCP e integrazione Linux/Windows in un ambiente simulato.
+La rete, denominata LabNAT, è stata progettata come ambiente isolato dal sistema host, ma con accesso regolato a Internet tramite gateway NAT.
+All’interno di questa infrastruttura operano attualmente due sistemi principali:
 
----
+DC01, un Domain Controller Windows Server che gestisce i ruoli Active Directory, DNS e DHCP.
 
-## ⚙ Panoramica del progetto
+Ubuntu01, un server Linux configurato come membro del dominio lab.local, utilizzato per testare e studiare l’integrazione tra ambienti Windows e Unix-like.
 
-Il *Mini Enterprise HomeLab* è un laboratorio virtuale progettato per replicare un’infrastruttura IT aziendale base.  
-L’obiettivo è imparare a gestire reti ibride (Windows + Linux), servizi di directory, DNS interni, DHCP, e successive integrazioni (come SMB, join di sistemi Linux, ecc.).
+Ogni configurazione è stata eseguita manualmente e documentata in modo dettagliato, con particolare attenzione alle motivazioni tecniche dietro ogni scelta.
+Il progetto si basa su un principio preciso: tutto ciò che viene implementato deve poter essere riprodotto con risorse open-source o con strumenti liberamente accessibili.
+Questa scelta permette di mantenere il laboratorio indipendente da licenze commerciali, garantendo al tempo stesso la possibilità di sperimentare in piena libertà e trasparenza.
+L’utilizzo di software libero consente inoltre di estendere e adattare la struttura nel tempo, restando coerenti con l’obiettivo educativo e tecnico del progetto.
 
-Attualmente il progetto è *in sviluppo attivo*: la parte Windows è completata, quella Linux è in preparazione.
+Mini Enterprise HomeLab è concepito come una piattaforma in costante evoluzione.
+Ciò che oggi rappresenta un laboratorio di base, domani potrà trasformarsi in un’infrastruttura più complessa, integrando nuove funzionalità come la gestione centralizzata delle policy, l’automazione dei processi amministrativi, la simulazione di reti multi-sede o l’introduzione di sistemi di monitoraggio e sicurezza avanzati.
+Ogni espansione verrà realizzata con la stessa logica metodica e documentata che caratterizza le fasi iniziali, mantenendo sempre un equilibrio tra sperimentazione e rigore tecnico.
 
----
+La documentazione ufficiale del progetto, in formato .docx, accompagna questa repository e illustra in modo completo ogni procedura, configurazione e verifica.
+Il presente repository GitHub rappresenta invece una panoramica sintetica e aggiornata del laboratorio, tracciandone l’evoluzione nel tempo e mantenendo un filo logico tra le varie fasi operative.
 
-## 🧩 Architettura di rete attuale
-
-*Tipo di rete:* NAT VMware (VMnet8)  
-*Subnet:* 192.168.149.0/24  
-*Gateway NAT:* 192.168.149.2  
-*DNS / Dominio interno:* lab.local
-
-| Macchina | Ruolo | IP | Sistema Operativo | Stato |
-|-----------|--------|----|------------------|--------|
-| *DC01* | Domain Controller, DNS, DHCP | 192.168.149.10 | Windows Server 2022 Datacenter | ✅ Configurato |
-| *Ubuntu01* | Linux Server (integrazione AD / test servizi) | 192.168.149.20 | Ubuntu Server 22.04 LTS | ⏳ Da configurare |
-| *FileSRV01* | File Server (SMB Share) | 192.168.149.30 | TBD | ⏳ Previsto |
-
----
-
-## 🖥 Configurazione VMware
-
-- *Virtual Network (VMnet8):*
-  - NAT abilitato, subnet 192.168.149.0/24
-  - Gateway virtuale 192.168.149.2
-  - DHCP locale disattivato (gestito da DC01)
-- *DC01:*
-  - CPU: 2 vCore
-  - RAM: 4 GB
-  - Disco: 60 GB (SCSI)
-  - Rete: VMnet8 (NAT)
-  - DNS interno: 192.168.149.10
-- *Ubuntu01 (previsto):*
-  - IP statico: 192.168.149.20
-  - Gateway: 192.168.149.2
-  - DNS: 192.168.149.10
-
----
-
-## 🧱 Servizi implementati finora
-
-| Servizio | Descrizione | Stato |
-|-----------|-------------|--------|
-| *Active Directory (AD DS)* | Dominio lab.local configurato e operativo | ✅ |
-| *DNS Server* | Zone forward/reverse integrate in AD | ✅ |
-| *DHCP Server* | Scope 192.168.149.100–200 (client range) | ✅ |
-| *Gateway NAT* | Accesso Internet tramite VMware NAT | ✅ |
-| *Linux Integration* | Join dominio e test comunicazione | 🚧 In sviluppo |
-
----
-
-## 🔍 Test effettuati
-
-- ✅ Risoluzione DNS interna (dc01.lab.local)
-- ✅ Ping e tracert verso Internet (NAT funzionante)
-- ✅ DHCP attivo e autorizzato in Active Directory
-- ✅ Connessione Internet del DC01 stabile
-- 🕓 In preparazione: test join Ubuntu01 → dominio lab.local
-
----
-
-## 🚀 Step successivi
-
-1. Installazione e configurazione *Ubuntu01 (192.168.149.20)*  
-   - IP statico, DNS interno, join dominio tramite realmd/sssd  
-2. Creazione di *FileSRV01 (192.168.149.30)* con SMB share centralizzato  
-3. Test di autenticazione cross-platform (Windows ↔ Linux)  
-4. Documentazione tecnica finale e diagramma aggiornato (Draw.io)
-
----
-
-## 🧾 Note finali
-
-Questo progetto è in costante evoluzione.  
-Attualmente è online solo la prima fase (infrastruttura base Windows).  
-Le prossime release aggiungeranno l’integrazione Linux, automazione Ansible e gestione centralizzata dei servizi.
-
----
-
-📅 *Aggiornamento:* Ottobre 2025  
-📍 *Stato:* Fase 1 completata – Active Directory + DNS + DHCP pienamente operativi
-
-
----
+In prospettiva, Mini Enterprise HomeLab non è solo un ambiente di test: è un percorso di crescita, una piattaforma personale dove teoria e pratica si incontrano.
+Un progetto costruito per essere ampliato, perfezionato e condiviso, mantenendo come principio guida la disponibilità, la trasparenza e l’utilizzo di tecnologie aperte.
